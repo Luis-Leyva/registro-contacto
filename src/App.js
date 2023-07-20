@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import InputForm from "./components/InputForm";
+import ShowContacts from "./components/ShowContacts";
+import { Container, Row, Col } from "react-bootstrap";
+import { useState, createContext } from "react";
+
+export const ContactosContext = createContext(null);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [contactos, setContactos] = useState([]);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <ContactosContext.Provider value={{ contactos, setContactos }}>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <InputForm />
+                            </Col>
+                            <Col>
+                                <ShowContacts />
+                            </Col>
+                        </Row>
+                    </Container>
+                </ContactosContext.Provider>
+            </header>
+        </div>
+    );
 }
 
 export default App;
+
